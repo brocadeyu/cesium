@@ -217,7 +217,7 @@ export async function bundleCesiumJs(options) {
       contexts.iifeWorkers = iifeWorkers;
     } else {
       handleBuildWarnings(iife);
-      rimraf.sync(inlineWorkerPath);
+      // rimraf.sync(inlineWorkerPath);
     }
   }
 
