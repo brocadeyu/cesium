@@ -36,6 +36,7 @@ import TextureMagnificationFilter from "../Renderer/TextureMagnificationFilter.j
 import TextureMinificationFilter from "../Renderer/TextureMinificationFilter.js";
 import WaterMaskMaterial from "../Shaders/Materials/WaterMaskMaterial.js";
 import WaterMaterial from "../Shaders/Materials/Water.js";
+import PolylineImageMaterial from "../Shaders/Materials/PolylineImage.js";
 
 /**
  * A Material defines surface appearance through a combination of diffuse, specular,
@@ -1644,6 +1645,23 @@ Material._materialCache.addMaterial(Material.PolylineOutlineType, {
     const uniforms = material.uniforms;
     return uniforms.color.alpha < 1.0 || uniforms.outlineColor.alpha < 1.0;
   },
+});
+
+/**
+ * Gets the name of the polyline repeat texture material.
+ * @type {string}
+ * @readonly
+ */
+Material.PolylineImageType = "PolylineImage";
+Material._materialCache.addMaterial(Material.PolylineImageType, {
+  fabric: {
+    type: Material.PolylineImageType,
+    uniforms: {
+      image: Material.DefaultImageId,
+    },
+    source: PolylineImageMaterial,
+  },
+  translucent: true,
 });
 
 /**
