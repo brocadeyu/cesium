@@ -11,3 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+*.tsbuildinfo
+
+gallery/list.json
+gallery/pagefind
+templates/Sandcastle.d.ts
+templates/Sandcastle.js
