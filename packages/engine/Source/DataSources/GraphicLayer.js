@@ -26,6 +26,8 @@ function GraphicLayer(viewer) {
   this._primitiveCollection = new PrimitiveCollection();
   this._isDrawing = false;
   this._viewer = viewer;
+  this._isAutoEdit = true; // 是否自动编辑
+  this._allowEdit = true; // 是否允许编辑
 
   this._screenSpaceEventHandler = new ScreenSpaceEventHandler(
     viewer.scene.canvas,

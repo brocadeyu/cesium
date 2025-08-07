@@ -78,7 +78,8 @@ async function drawPolyline(polylineGraphics, viewer) {
   });
 }
 
-async function drawCurvePolyline(polylineGraphics, viewer) {
+async function drawCurvePolyline(graphic, viewer) {
+  const polylineGraphics = graphic.polyline;
   return new Promise((resolve) => {
     const handler = new ScreenSpaceEventHandler(viewer.scene.canvas);
     const positions = [];
@@ -136,6 +137,18 @@ async function drawCurvePolyline(polylineGraphics, viewer) {
 
       if (defined(position)) {
         positions.push(position);
+        const entity = new Entity({
+          position: position,
+          point: {
+            pixelSize: 8,
+            color: Color.RED,
+            outlineColor: Color.YELLOW,
+            outlineWidth: 1,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          },
+        });
+        entity.parent = graphic;
+        viewer.entities.add(entity);
       }
     };
 
@@ -250,7 +263,7 @@ Graphic.prototype.startDraw = async function (viewer) {
     await drawPoint(this, viewer);
   }
   if (this._type === GraphicType.CURVE_POLYLINE) {
-    await drawCurvePolyline(this.polyline, viewer);
+    await drawCurvePolyline(this, viewer);
   }
 };
 Graphic.prototype.stopDraw = function (options) {
